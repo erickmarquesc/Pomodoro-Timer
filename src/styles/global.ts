@@ -5,6 +5,9 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
   };
 
   :focus{
@@ -17,9 +20,4 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme["gray-300"]};
   };
 
-  border-style, input-security, textarea, button{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-  };
 `;
