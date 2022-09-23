@@ -6,18 +6,19 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
   };
-
+  
   :focus{
     outline: 0;
     box-shadow: 0 0 0 2px ${props => props.theme["gray-500"]};
   };
-
+  
   body{
-    background: ${props => props.theme["gray-900"]};
+    font-size: 1rem;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
     color: ${props => props.theme["gray-300"]};
+    background: ${props => props.theme["gray-900"]};
   };
 
 `;
