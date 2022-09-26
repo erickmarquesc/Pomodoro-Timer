@@ -262,6 +262,11 @@
   "resolved" "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz"
   "version" "0.7.5"
 
+"@hookform/resolvers@^2.9.8":
+  "integrity" "sha512-iVVjH0USq+1TqDdGkWe2M1x7Wn5OFPgVRo7CbWFsXTqqXqCaZtZcnzJu+UhljCWbthFWxWGXKLGYUDPZ04oVvQ=="
+  "resolved" "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-2.9.8.tgz"
+  "version" "2.9.8"
+
 "@jridgewell/gen-mapping@^0.1.0":
   "integrity" "sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w=="
   "resolved" "https://registry.npmjs.org/@jridgewell/gen-mapping/-/gen-mapping-0.1.1.tgz"
@@ -640,6 +645,11 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
+"react-hook-form@^7.0.0", "react-hook-form@^7.36.1":
+  "integrity" "sha512-EbYYkCG2p8ywe7ikOH2l02lAFMrrrslZi1I8fqd8ifDGNAkhomHZQzQsP6ksvzrWBKntRe8b5L5L7Zsd+Gm02Q=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.36.1.tgz"
+  "version" "7.36.1"
+
 "react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -669,7 +679,7 @@
   dependencies:
     "@remix-run/router" "1.0.0"
 
-"react@^18.2.0", "react@>= 16.8.0", "react@>=16", "react@>=16.8":
+"react@^16.8.0 || ^17 || ^18", "react@^18.2.0", "react@>= 16.8.0", "react@>=16", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -781,3 +791,8 @@
     "rollup" "~2.78.0"
   optionalDependencies:
     "fsevents" "~2.3.2"
+
+"zod@^3.19.1":
+  "integrity" "sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA=="
+  "resolved" "https://registry.npmjs.org/zod/-/zod-3.19.1.tgz"
+  "version" "3.19.1"
