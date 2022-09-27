@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Play } from "phosphor-react";
+import { useState } from "react";
 import * as zod from "zod";
 import {
   StartCountdownButton,
@@ -23,8 +24,18 @@ const newCycleFormValidationSchema = zod.object({
 /* O zod cria a interface necessária pelo schema  */
 type INewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
+interface ICycle {
+  id: string;
+  task: string;
+  minutesAmount: number;
+};
+
 export function Home() {
 
+  
+  const [cycles, setCycles] = useState<ICycle[]>([]);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  
   const { register, handleSubmit, watch, reset } = useForm<INewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
@@ -32,14 +43,27 @@ export function Home() {
       minutesAmount: 0,
     }
   });
-
-  const tasks = watch('task');
-  const isSubmitDisabled = !tasks;
-
+  
   function handleCreateNewCycle(data: INewCycleFormData) {
+    const id = String(new Date().getTime());
+    
+    const newCycle: ICycle = {
+      id,
+      task: data.task,
+      minutesAmount: data.minutesAmount,
+    };
+    
+    setCycles((precedingCycles) => [...precedingCycles, newCycle]);
+    setActiveCycleId(id);
+    
     reset();
   };
-
+  
+  const activeCycle = cycles.find((cycle)=> cycle.id === activeCycleId);
+  
+  const tasks = watch('task');
+  const isSubmitDisabled = !tasks;
+  console.log(activeCycle);
   return (
     <HomeContainer>
       <form
