@@ -1,19 +1,30 @@
+import { StartCountdownButton, StopCountdownButton, HomeContainer, } from "./styles";
+import { NewCycleForm } from "./components/NewCycleForm";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Countdown } from "./components/Countdow";
 import { HandPalm, Play } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import * as zod from "zod";
-import { differenceInSeconds } from "date-fns";
-import {
-  StartCountdownButton,
-  StopCountdownButton,
-  MinutesAmountInput,
-  CountdownContainer,
-  FormContainer,
-  HomeContainer,
-  Separator,
-  TaskInput,
-} from "./styles";
+
+interface ICycle {
+  id: string;
+  task: string;
+  startDate: Date;
+  finishedDate?: Date;
+  minutesAmount: number;
+  interruptedDate?: Date;
+};
+
+interface ICycleContextType {
+  amountSecondsPassed: number;
+  activeCycleId: string | null;
+  activeCycle: ICycle | undefined;
+  markCurrentCycleAsFinished: () => void;
+  setSecondsPassed: (seconds: number) => void;
+};
+
+export const CyclesContext = createContext({} as ICycleContextType);
 
 /* Schema */
 const newCycleFormValidationSchema = zod.object({
@@ -26,27 +37,23 @@ const newCycleFormValidationSchema = zod.object({
 /* O zod cria a interface necessária pelo schema  */
 type INewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
-interface ICycle {
-  id: string;
-  task: string;
-  startDate: Date;
-  finishedDate?: Date;
-  minutesAmount: number;
-  interruptedDate?: Date;
-};
-
 export function Home() {
-  const [cycles, setCycles] = useState<ICycle[]>([]);
-  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
 
-  const { register, handleSubmit, watch, reset } = useForm<INewCycleFormData>({
+  const [cycles, setCycles] = useState<ICycle[]>([]);
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
+  const newCycleForm = useForm<INewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
       task: '',
       minutesAmount: 0,
     }
   });
+
+  const { handleSubmit, watch, reset } = newCycleForm;
+  const tasks = watch('task');
+  const isSubmitDisabled = !tasks;
+  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
   function handleCreateNewCycle(data: INewCycleFormData) {
     const id = String(new Date().getTime());
@@ -78,55 +85,21 @@ export function Home() {
     setActiveCycleId(null);
   };
 
-  const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
-
-  useEffect(() => {
-    let interval: number;
-
-    if (activeCycle) {
-      interval = setInterval(() => {
-        const secondsDifference = differenceInSeconds(
-          new Date(),
-          activeCycle.startDate,);
-
-        if (secondsDifference >= totalSeconds) {
-          setCycles((stateCycle) =>
-            stateCycle.map((cycle) => {
-              if (cycle.id === activeCycleId) {
-                return { ...cycle, finishedDate: new Date() }
-              } else {
-                return cycle;
-              }
-            }),
-          );
-          setAmountSecondsPassed(totalSeconds);
-          clearInterval(interval);
+  function markCurrentCycleAsFinished() {
+    setCycles((stateCycle) =>
+      stateCycle.map((cycle) => {
+        if (cycle.id === activeCycleId) {
+          return { ...cycle, finishedDate: new Date() }
         } else {
-          setAmountSecondsPassed(secondsDifference);
-        };
-      }, 1000)
-    };
+          return cycle;
+        }
+      }),
+    );
+  };
 
-    return () => {
-      clearInterval(interval);
-    }
-  }, [activeCycle]);
-
-  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
-  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
-  const minutesAmount = Math.floor(currentSeconds / 60);
-  const secondsAmount = currentSeconds % 60;
-  const minutes = String(minutesAmount).padStart(2, '0');
-  const seconds = String(secondsAmount).padStart(2, '0');
-
-  const tasks = watch('task');
-  const isSubmitDisabled = !tasks;
-
-  useEffect(() => {
-    if (activeCycle) {
-      document.title = `Pomodoro | ${minutes}:${seconds}`
-    }
-  }, [minutes, seconds, activeCycle]);
+  function setSecondsPassed(seconds: number) {
+    setAmountSecondsPassed(seconds);
+  };
 
   return (
     <HomeContainer>
@@ -134,39 +107,22 @@ export function Home() {
         action=""
         onSubmit={handleSubmit(handleCreateNewCycle)}
       >
-        <FormContainer>
+        <CyclesContext.Provider value={{
+          activeCycle,
+          activeCycleId,
+          setSecondsPassed,
+          amountSecondsPassed,
+          markCurrentCycleAsFinished
+        }}>
 
-          <label>Vou trabalhar em</label>
-          <TaskInput
-            id="task"
-            disabled={!!activeCycle}
-            placeholder="Nome do seu projeto"
-            {...register('task')}
-          />
+          <FormProvider {...newCycleForm}>
+            <NewCycleForm />
+          </FormProvider>
 
-          <label htmlFor="minutesAmount">durante</label>
-          <MinutesAmountInput
-            min={1}
-            max={60}
-            step={5}
-            type="number"
-            placeholder="00"
-            id="minutesAmount"
-            disabled={!!activeCycle}
-            {...register('minutesAmount', { valueAsNumber: true })}
-          />
+          <Countdown />
 
-          <span>minutos.</span>
+        </CyclesContext.Provider>
 
-        </FormContainer>
-
-        <CountdownContainer>
-          <span>{minutes[0]}</span>
-          <span>{minutes[1]}</span>
-          <Separator>:</Separator>
-          <span>{seconds[0]}</span>
-          <span>{seconds[1]}</span>
-        </CountdownContainer>
 
         {activeCycle ? (
           <StopCountdownButton
