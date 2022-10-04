@@ -4,12 +4,21 @@ import { useContext, useEffect } from "react";
 import { CyclesContext } from "../..";
 
 export function Countdown() {
+
+  const {
+    activeCycle,
+    activeCycleId,
+    amountSecondsPassed,
+    setSecondsPassed,
+    markCurrentCycleAsFinished
+  } = useContext(CyclesContext);
+
+  const totalTimeInSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
+  const currentSeconds = activeCycle ? totalTimeInSeconds - amountSecondsPassed : 0;
   
-  const { activeCycle, activeCycleId, markCurrentCycleAsFinished,amountSecondsPassed,setSecondsPassed } = useContext(CyclesContext);
-  const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
-  const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
   const minutesAmount = Math.floor(currentSeconds / 60);
   const secondsAmount = currentSeconds % 60;
+
   const minutes = String(minutesAmount).padStart(2, '0');
   const seconds = String(secondsAmount).padStart(2, '0');
 
@@ -35,7 +44,7 @@ export function Countdown() {
     return () => {
       clearInterval(interval);
     }
-  }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished]);
+  }, [activeCycle, totalTimeInSeconds, activeCycleId, markCurrentCycleAsFinished]);
 
   useEffect(() => {
     if (activeCycle) {
