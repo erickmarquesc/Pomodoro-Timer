@@ -31,9 +31,9 @@ export function Countdown() {
           new Date(),
           activeCycle.startDate,);
 
-        if (secondsDifference >= totalSeconds) {
+        if (secondsDifference >= totalTimeInSeconds) {
           markCurrentCycleAsFinished();
-          setSecondsPassed(totalSeconds);
+          setSecondsPassed(totalTimeInSeconds);
           clearInterval(interval);
         } else {
           setSecondsPassed(secondsDifference);
