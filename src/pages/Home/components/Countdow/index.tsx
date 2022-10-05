@@ -15,7 +15,7 @@ export function Countdown() {
 
   const totalTimeInSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
   const currentSeconds = activeCycle ? totalTimeInSeconds - amountSecondsPassed : 0;
-  
+
   const minutesAmount = Math.floor(currentSeconds / 60);
   const secondsAmount = currentSeconds % 60;
 
@@ -29,7 +29,8 @@ export function Countdown() {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
           new Date(),
-          activeCycle.startDate,);
+          new Date(activeCycle.startDate),
+        );
 
         if (secondsDifference >= totalTimeInSeconds) {
           markCurrentCycleAsFinished();
