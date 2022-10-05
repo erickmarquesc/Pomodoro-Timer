@@ -44,7 +44,7 @@ Nesse projeto, desenvolvi uma aplicação de controle de tempo no estilo **Pomod
 - Adicionar uma nova tarefa e o tempo que ela levará
 - Listar uma tarefa com seu status
 - Mostrar o progresso de conclusão, andamento ou interrompição das tarefas
-- Mostrar o time
+- Mostrar o tempo
 
 Apesar de serem poucas funcionalidades, precisei abordar conceitos como:
 
