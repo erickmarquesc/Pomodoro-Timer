@@ -1,19 +1,6 @@
 import { ActionTypes } from "./actions";
 import { produce } from "immer";
-
-export interface ICycle {
-  id: string;
-  task: string;
-  startDate: Date;
-  finishedDate?: Date;
-  minutesAmount: number;
-  interruptedDate?: Date;
-};
-
-interface ICyclesState {
-  cycles: ICycle[];
-  activeCycleId: string | null;
-};
+import { ICyclesState } from "./interfaces";
 
 export function cyclesReducer(state: ICyclesState, action: any) {
 

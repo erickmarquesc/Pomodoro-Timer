@@ -1,30 +1,8 @@
 import { differenceInSeconds } from "date-fns";
-import { createContext, ReactNode, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { addNewCyleAction, interruptCurrentCycleAction, markCurrentCycleAsFinishedAction } from "../reducers/cycles/actions";
-import { cyclesReducer, ICycle } from "../reducers/cycles/reducer";
-
-
-
-interface ICreateCycleData {
-  task: string;
-  minutesAmount: number;
-}
-
-interface ICycleContextType {
-  cycles: ICycle[];
-  amountSecondsPassed: number;
-  activeCycleId: string | null;
-  activeCycle: ICycle | undefined;
-  markCurrentCycleAsFinished: () => void;
-  setSecondsPassed: (seconds: number) => void;
-  createNewCycle: (data: ICreateCycleData) => void;
-  interruptCurrentCycle: () => void;
-};
-
-interface ICycleContextProviderProps {
-  children: ReactNode;
-}
-
+import { cyclesReducer } from "../reducers/cycles/reducer";
+import { ICreateCycleData, ICycle, ICycleContextProviderProps, ICycleContextType } from "./interfaces";
 
 
 export const CyclesContext = createContext({} as ICycleContextType);
