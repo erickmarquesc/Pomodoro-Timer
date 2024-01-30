@@ -17,7 +17,7 @@ export function NewCycleForm() {
         id="task"
         disabled={!!activeCycle}
         placeholder="Nome da tarefa"
-      list="task-suggestions"
+        list="task-suggestions"
         {...register('task')}
       />
 
@@ -30,9 +30,6 @@ export function NewCycleForm() {
       <label htmlFor="minutesAmount">durante</label>
 
       <MinutesAmountInput
-        min={1}
-        max={60}
-        /* step={5} */
         type="number"
         placeholder="00"
         id="minutesAmount"
