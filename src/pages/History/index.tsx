@@ -8,7 +8,7 @@ import ptBR from "date-fns/locale/pt-BR";
 export function History() {
   const { cycles } = useContext(CyclesContext);
 
-  const handleClierHistory = () => {
+  const handleClearHistory = () => {
     localStorage.clear()
     window.location.reload();
   }
@@ -18,7 +18,7 @@ export function History() {
       <HistoryHeader>
 
         <h1>Meu histórico</h1>
-        <button onClick={() => handleClierHistory()}>
+        <button onClick={() => handleClearHistory()}>
           <Trash size={24} />
           Limpar histórico
         </button>
