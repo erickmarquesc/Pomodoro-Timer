@@ -6,11 +6,43 @@ export const HistoryContainer = styled.main`
   padding: 3.5rem;
   flex-direction: column;
 
+  
+`;
+
+export const HistoryHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   h1{
     font-size: 1.5rem;
     color: ${(props) => props.theme["gray-100"]};
   }
-`;
+
+  button{
+    border: 0;
+    gap: 0.5rem;
+    width: auto;
+    height: 64px;
+    padding: 1rem;
+    display: flex;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    color: ${(props) => props.theme["gray-100"]};
+    background-color: ${(props) => props.theme["green-300"]};
+    text-transform: uppercase;
+
+    transition: 1s ease-in-out;
+
+    &:hover{
+      background: ${(props) => props.theme["red-700"]};
+    };
+  }
+`
 
 export const HistoryList = styled.div`
   flex: 1;
@@ -39,6 +71,7 @@ export const HistoryList = styled.div`
         border-top-right-radius: 8px;
         padding-right: 1.5rem;
       }
+      
     }
 
     td{
@@ -58,6 +91,15 @@ export const HistoryList = styled.div`
       }
     }
   }
+
+    .clearHistory{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 32px;
+      align-items: center;
+      justify-content: center;
+    }
 `;
 
 const STATUS_COLORS={
