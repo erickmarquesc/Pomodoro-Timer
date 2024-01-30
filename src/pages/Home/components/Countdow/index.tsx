@@ -22,6 +22,10 @@ export function Countdown() {
   const minutes = String(minutesAmount).padStart(2, '0');
   const seconds = String(secondsAmount).padStart(2, '0');
 
+  const isMinutesZero = minutes[0] === '0' && minutes[1] === '0'
+  const isSecondsZero = seconds[0] === '0' 
+  const isTimeInCountdown = isMinutesZero && isSecondsZero && !!activeCycle
+  
   useEffect(() => {
     let interval: number;
 
@@ -54,12 +58,12 @@ export function Countdown() {
   }, [minutes, seconds, activeCycle]);
 
   return (
-    <CountdownContainer>
+    <CountdownContainer isTimeInCountdown={isTimeInCountdown}>
       <span>{minutes[0]}</span>
       <span>{minutes[1]}</span>
       <Separator>:</Separator>
       <span>{seconds[0]}</span>
-      <span>{seconds[1]}</span>
+      <span className="timeInCountdown">{seconds[1]}</span>
     </CountdownContainer>
   );
 };
