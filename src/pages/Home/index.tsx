@@ -7,20 +7,21 @@ import { HandPalm, Play } from "phosphor-react";
 import { useContext } from "react";
 import * as zod from "zod";
 import { CyclesContext } from "../../context/CyclesContext";
+import { RangeMessage } from "./components/RangeMessage";
 
 /* Schema */
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, 'Indique um nome para tarefa'),
   minutesAmount: zod.number()
     .min(1, 'O minimo para tarefa é 1 minutos')
-    .max(60, 'O maximo para tarefa é 60 minutos'),
+    .max(60, 'O maximo para tarefa é de 60 minutos'),
 });
 
 /* O zod cria a interface necessária pelo schema  */
 type INewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-  const { createNewCycle,interruptCurrentCycle,activeCycle} = useContext(CyclesContext);
+  const { createNewCycle,interruptCurrentCycle,activeCycle, cycles} = useContext(CyclesContext);
 
   const newCycleForm = useForm<INewCycleFormData>({
     resolver: zodResolver(newCycleFormValidationSchema),
@@ -30,7 +31,7 @@ export function Home() {
     }
   });
 
-  const { handleSubmit, watch,  reset } = newCycleForm;
+  const { handleSubmit, watch,  reset, formState:{errors} } = newCycleForm;
 
   function handleCreateNewCycle(data:INewCycleFormData){
     createNewCycle(data)
@@ -39,6 +40,8 @@ export function Home() {
 
   const tasks = watch('task');
   const isSubmitDisabled = !tasks;
+
+  const minutesAmountMessageErro = errors.minutesAmount?.message
 
   return (
     <HomeContainer>
@@ -51,6 +54,8 @@ export function Home() {
           <NewCycleForm />
         </FormProvider>
 
+        <RangeMessage minutesAmountMessageErro={minutesAmountMessageErro } />
+
         <Countdown />
 
         {activeCycle ? (
@@ -59,7 +64,7 @@ export function Home() {
             onClick={interruptCurrentCycle}
           >
             <HandPalm size={24} />
-            Interromper
+            Interromper tarefa
           </StopCountdownButton>
         ) : (
           <StartCountdownButton
