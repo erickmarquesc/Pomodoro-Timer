@@ -1,42 +1,41 @@
 import { differenceInSeconds } from 'date-fns'
 import {
-  createContext,
+  useState,
   ReactNode,
   useEffect,
   useReducer,
-  useState,
+  createContext,
 } from 'react'
 import {
-  ActionTypes,
   addNewCycleAction,
   interruptCurrentCycleAction,
   markCurrentCycleAsFinishedAction,
 } from '../reducers/cycles/actions'
-import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
+import { ICycle, cyclesReducer } from '../reducers/cycles/reducer'
 
-interface CreateCycleData {
+interface ICreateCycleData {
   task: string
   minutesAmount: number
 }
 
-interface CyclesContextType {
-  cycles: Cycle[]
-  activeCycle: Cycle | undefined
-  activeCycleId: string | null
+interface ICyclesContextType {
+  cycles: ICycle[]
   amountSecondsPassed: number
+  activeCycleId: string | null
+  activeCycle: ICycle | undefined
+  interruptCurrentCycle: () => void
   markCurrentCycleAsFinished: () => void
   setSecondsPassed: (seconds: number) => void
-  createNewCycle: (data: CreateCycleData) => void
-  interruptCurrentCycle: () => void
+  createNewCycle: (data: ICreateCycleData) => void
 }
 
-export const CyclesContext = createContext({} as CyclesContextType)
+export const CyclesContext = createContext({} as ICyclesContextType)
 
-interface CyclesContextProviderProps {
+interface ICyclesContextProviderProps {
   children: ReactNode
 }
 
-export function CyclesContextProvider({ children }: CyclesContextProviderProps) {
+export function CyclesContextProvider({ children }: ICyclesContextProviderProps) {
   const [cyclesState, dispatch] = useReducer(cyclesReducer, {
     cycles: [],
     activeCycleId: null,
@@ -80,10 +79,10 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
     dispatch(markCurrentCycleAsFinishedAction())
   }
 
-  function createNewCycle(data: CreateCycleData) {
+  function createNewCycle(data: ICreateCycleData) {
     const id = String(new Date().getTime())
 
-    const newCycle: Cycle = {
+    const newCycle: ICycle = {
       id,
       task: data.task,
       minutesAmount: data.minutesAmount,
@@ -105,11 +104,11 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
         cycles,
         activeCycle,
         activeCycleId,
-        markCurrentCycleAsFinished,
         amountSecondsPassed,
-        setSecondsPassed,
         createNewCycle,
+        setSecondsPassed,
         interruptCurrentCycle,
+        markCurrentCycleAsFinished,
       }}
     >
       {children}

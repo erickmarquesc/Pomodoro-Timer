@@ -1,16 +1,17 @@
-import { useContext } from "react";
-import { ContentRangeMessage } from "./styles"
-import { CyclesContext } from "../../../../context/CyclesContext";
-import { Status } from "../../../History/styles";
-import { formatDistanceToNow } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR";
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useContext } from 'react'
+
+import { CyclesContext } from '../../../../context/CyclesContext'
+import { Status } from '../../../History/styles'
+import { ContentRangeMessage } from './styles'
 
 interface IRangeMessageProps {
   minutesAmountMessageErro: string | undefined
 }
 
 export const RangeMessage = ({ minutesAmountMessageErro }: IRangeMessageProps) => {
-  const { cycles } = useContext(CyclesContext);
+  const { cycles } = useContext(CyclesContext)
 
   return (
     <ContentRangeMessage>

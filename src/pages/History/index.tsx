@@ -1,22 +1,22 @@
-import { useContext } from "react";
-import { CyclesContext } from "../../context/CyclesContext";
-import { HistoryContainer, HistoryHeader, HistoryList, Status } from "./styles";
-import { formatDistanceToNow } from "date-fns";
-import { Trash, Scroll } from "phosphor-react";
+import { formatDistanceToNow } from 'date-fns'
+import { Trash, Scroll } from 'phosphor-react'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useContext } from 'react'
 
-import ptBR from "date-fns/locale/pt-BR";
+import { HistoryContainer, HistoryHeader, HistoryList, Status } from './styles'
+import { CyclesContext } from '../../context/CyclesContext'
+
 export function History() {
-  const { cycles } = useContext(CyclesContext);
+  const { cycles } = useContext(CyclesContext)
 
   const handleClearHistory = () => {
     localStorage.clear()
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
     <HistoryContainer>
       <HistoryHeader>
-
         <h1>Meu histórico</h1>
         <button onClick={() => handleClearHistory()}>
           <Trash size={24} />
@@ -80,4 +80,4 @@ export function History() {
       </HistoryList>
     </HistoryContainer>
   )
-};
+}
