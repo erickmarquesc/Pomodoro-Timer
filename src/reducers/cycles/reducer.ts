@@ -1,22 +1,20 @@
 import { produce } from 'immer'
-
 import { ActionTypes } from './actions'
 
-export interface Cycle {
-  id: string
-  task: string
-  minutesAmount: number
-  startDate: Date
-  interruptedDate?: Date
-  finishedDate?: Date
+export interface ICycle {
+  id: string,
+  task: string,
+  minutesAmount: number,
+  startDate: Date,
+  interruptedDate?: Date,
+  finishedDate?: Date,
 }
 
-interface CyclesState {
-  cycles: Cycle[]
-  activeCycleId: string | null
+interface ICyclesState {
+  cycles: ICycle[],
+  activeCycleId: string | null,
 }
-
-export function cyclesReducer(state: CyclesState, action: any) {
+export function cyclesReducer(state: ICyclesState, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_NEW_CYCLE:
       return produce(state, (draft) => {
