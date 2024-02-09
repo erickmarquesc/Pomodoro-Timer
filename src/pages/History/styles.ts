@@ -1,22 +1,21 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const HistoryContainer = styled.main`
   flex: 1;
   display: flex;
   padding: 3.5rem;
   flex-direction: column;
-
-  
-`;
+`
 
 export const HistoryHeader = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   h1{
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: ${(props) => props.theme["gray-100"]};
-  }
+  };
 
   button{
     border: 0;
@@ -25,23 +24,23 @@ export const HistoryHeader = styled.div`
     height: 64px;
     padding: 1rem;
     display: flex;
-    font-size: 1rem;
+    font-size: 1.6rem;
     cursor: pointer;
     font-weight: bold;
     border-radius: 8px;
     align-items: center;
     justify-items: center;
     justify-content: center;
+    text-transform: uppercase;
     color: ${(props) => props.theme["gray-100"]};
     background-color: ${(props) => props.theme["green-300"]};
-    text-transform: uppercase;
 
     transition: 1s ease-in-out;
 
     &:hover{
       background: ${(props) => props.theme["red-700"]};
     };
-  }
+  };
 `
 
 export const HistoryList = styled.div`
@@ -51,56 +50,59 @@ export const HistoryList = styled.div`
 
   table{
     width: 100%;
-    border-collapse: collapse;
     min-width: 600px;
+    border-collapse: collapse;
 
     th{
-      background-color: ${(props)=> props.theme["gray-600"]};
       padding: 1rem;
       text-align: left;
-      color: ${(props)=> props.theme["gray-100"]};
-      font-size: 0.875rem;
       line-height: 1.6;
+      font-size: 1.8rem;
+      color: ${(props)=> props.theme["gray-100"]};
+      background-color: ${(props)=> props.theme["gray-600"]};
 
       &:first-child{
-        border-top-left-radius: 8px;
         padding-left: 1.5rem;
-      }
+        border-top-left-radius: 8px;
+      };
 
       &:last-child{
-        border-top-right-radius: 8px;
         padding-right: 1.5rem;
-      }
-      
-    }
+        border-top-right-radius: 8px;
+      };
+    };
 
     td{
+      padding: 1rem;
+      line-height: 1.6;
+      font-size: 1.8rem;
       background-color: ${(porps)=> porps.theme["gray-700"]};
       border-top: 4px solid ${(props)=> props.theme["gray-800"]};
-      padding: 1rem;
-      font-size: 0.875rem;
-      line-height: 1.6;
 
       &:first-child{
         width: 50%;
         padding-left: 1.5rem;
-      }
+      };
 
       &:last-child{
         padding-right: 1.5rem;
-      }
-    }
-  }
+      };
+    };
+  };
 
-    .clearHistory{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-top: 32px;
-      align-items: center;
-      justify-content: center;
-    }
-`;
+  .clearHistory{
+    width: 100%;
+    display: flex;
+    margin-top: 32px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    strong{
+      font-size: 1.6rem;
+    };
+  };
+`
 
 const STATUS_COLORS={
   yellow: 'yellow-500',
@@ -110,7 +112,7 @@ const STATUS_COLORS={
 
 interface IStatusProps{
   statusColor: keyof typeof STATUS_COLORS;
-};
+}
 
 export const Status = styled.span<IStatusProps>`
   gap: 0.5rem;
@@ -123,5 +125,5 @@ export const Status = styled.span<IStatusProps>`
     height: 0.5rem;
     border-radius: 50%;
     background-color: ${(props)=> props.theme[STATUS_COLORS[props.statusColor]]};
-  }
-`;
+  };
+`

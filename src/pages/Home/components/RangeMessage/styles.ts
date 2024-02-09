@@ -1,25 +1,22 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const ContentRangeMessage = styled.div`
   flex: 1;
-  overflow: auto;
   width: 100%;
 
   div{
+    gap: 12px;
+    padding: 1rem;
     display: flex;
+    min-width: 600px;
+    font-size: 1.6rem;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    width: 100%;
     border-collapse: collapse;
-    min-width: 600px;
     background-color: ${(porps) => porps.theme["gray-700"]};
-    padding: 1rem;
-    font-size: 0.875rem;
-    gap: 12px;
 
     strong{
       display: flex;
-    }
-  }
+    };
+  };
 `

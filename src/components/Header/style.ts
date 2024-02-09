@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
 
   nav{
-    gap: 0.5rem;
+    gap: 1rem;
     display: flex;
 
     a{
@@ -23,11 +23,11 @@ export const HeaderContainer = styled.header`
 
       &:hover{
         border-bottom: 3px solid ${(props => props.theme["green-500"])};
-      }
+      };
 
       &.active{
         color: ${(props)=> props.theme["green-500"]};
-      }
-    }
-  }
-`;
+      };
+    };
+  };
+`
