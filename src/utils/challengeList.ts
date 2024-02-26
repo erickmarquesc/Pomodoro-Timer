@@ -34,30 +34,30 @@ export const ChallengeList: IChallengeListProps[] = [{
   id: 2,
   title: 'Exercite-se',
   img: `${exercise}`,
-  description: 'Exercite-se por cinco minutos e estique suas pernas pra você ficar saudável.',
+  description: 'Exercite-se por dez minutos e estique suas pernas pra você ficar saudável.',
   cycle: {
     task: "Desafio Exercite-se",
-    minutesAmount: 5,
+    minutesAmount: 10,
   },
 },
 {
   id: 3,
   title: 'Mova os olhos',
   img: `${eye}`,
-  description: 'Por cinco minutos tire seus olhos da telinha e faça algo pra saúde de seus olhos.',
+  description: 'por dez minutos tire seus olhos da telinha e faça algo pra saúde de seus olhos.',
   cycle: {
     task: "Desafio Mova os olhos",
-    minutesAmount: 5,
+    minutesAmount: 10,
   },
 },
 {
   id: 4,
   title: 'Rede social',
   img: `${phone}`,
-  description: 'De uma olhadinha nas redes sociais por cinco minutos.',
+  description: 'De uma olhadinha nas redes sociais por dez minutos.',
   cycle: {
     task: "Desafio Rede social",
-    minutesAmount: 5,
+    minutesAmount: 10,
   },
 },
 {
@@ -67,37 +67,37 @@ export const ChallengeList: IChallengeListProps[] = [{
   description: 'Complete + um ciclo pomodoro de vinte e cinco minutos.',
   cycle: {
     task: "Desafio Ciclo extra II",
-    minutesAmount: 5,
+    minutesAmount: 25,
   },
   },
   {
     id: 6,
     title: 'Hidrate-se',
     img: `${water}`,
-    description: 'Aproveite os próximos cinco minutos para beber água.',
+    description: 'Aproveite os próximos dez minutos para beber água.',
     cycle: {
       task: "Desafio Hidrate-se",
-      minutesAmount: 5,
+      minutesAmount: 10,
     },
   },
   {
     id: 7,
     title: 'Oraganizando as coisas',
     img: `${folder}`,
-    description: 'Aproveite o tempo de cinco minutos para organizar sua mesa.',
+    description: 'Aproveite o tempo de dez minutos para organizar sua mesa.',
     cycle: {
       task: "Desafio Oraganizando as coisas",
-      minutesAmount: 5,
+      minutesAmount: 10,
     },
   },
   {
     id: 8,
     title: 'Solta o som DJ',
     img: `${music}`,
-    description: 'Nesses cinco minutos pare para ouvir uma boa música.',
+    description: 'Nesses dez minutos pare para ouvir uma boa música.',
     cycle: {
       task: "Desafio Solta o som DJ",
-      minutesAmount: 5,
+      minutesAmount: 10,
     },
   },
   {
@@ -114,10 +114,10 @@ export const ChallengeList: IChallengeListProps[] = [{
     id: 10,
     title: 'Hora do café',
     img: `${coffee}`,
-    description: '5 minutinhos para um café.',
+    description: 'Dez minutinhos para um café.',
     cycle: {
       task: "Desafio Hora do café",
-      minutesAmount: 5,
+      minutesAmount: 10,
     },
   },
   {
@@ -127,7 +127,7 @@ export const ChallengeList: IChallengeListProps[] = [{
     description: 'Complete + um ciclo pomodoro de vinte e cinco minutos.',
     cycle: {
       task: "Desafio Ciclo extra II",
-      minutesAmount: 5,
+      minutesAmount: 25,
     },
   }
 ]
